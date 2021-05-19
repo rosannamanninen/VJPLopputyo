@@ -59,6 +59,7 @@
             "date": "2021-04-23T18:25:43.511Z",
             "articleName": "Spotte wood owl",
             "articleContent": "The spotted wood owl grows to a length of about 44 to 48 cm (17 to 19 in)"
+
         },
         {
             "year": 2021,
@@ -72,5 +73,7 @@
             "articleName": "Red owl",
             "articleContent": "The red owl (Tyto soumagnei) is an owl in the barn owl family Tytonidae"
         }
+        
+
     ]
 }
