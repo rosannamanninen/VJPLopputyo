@@ -40,6 +40,7 @@ function fetchData(vuosi = 0, artikkeli = "", kommentti = "") {
             document.getElementById("IDartikkeli").innerHTML = str;
             document.getElementById("IDkommentti").innerHTML = kommenttiField;
 
+<<<<<<< HEAD
             // render the article comments to HTML
             let rendr = `<ul id= "listaalku">`;
             let inputValue;
@@ -100,6 +101,33 @@ function parseDate(x) {
     let y = new Date(JSON.parse(`"`+x+`"`));
     return y;
 }
+=======
+let testArray = [];
+
+function fetchData() {
+    fetch("./data.json").then(response => {
+        return response.json();
+    })
+    .then((data) =>  {
+        // console.log(data.artikkelit[0].year)
+        // console.log(data.artikkelit.length)
+        for (i = 0; i < data.artikkelit.length; i++) {
+            testArray.push(data.artikkelit[i].year);
+            //console.log(testArray);
+        }
+        const eriVuodet = [...new Set(testArray)];
+        console.log(eriVuodet);
+        let str = `<ul>`
+
+        eriVuodet.forEach(function(vuosi) {
+            str += `<li>${vuosi}<li>`;
+        });
+        str += `</ul>`
+        document.getElementById("aikajanaLista").innerHTML = str;
+    });
+}   
+fetchData();
+>>>>>>> 6b83f21d91fdc11ee12113691db032106eaa2f4c
 
 // Object constructor for article comments
 class Comment {
