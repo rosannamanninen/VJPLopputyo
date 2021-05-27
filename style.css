@@ -167,6 +167,7 @@ transition: 0.8s;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 35px;
   padding-top: 15px;
   background-color: rgba(237, 161, 164, 0.2);
@@ -183,6 +184,7 @@ transition: 0.8s;
 
   padding-top: 5px;
   padding-bottom: 20px;
+  max-width: 700px;
 
 
 }
@@ -197,6 +199,7 @@ transition: 0.8s;
 .kommentit li {
   border-bottom: 1px solid #797b85;
   padding: 16px;
+  font-size: 16px;
 }
 
 .napit {

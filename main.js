@@ -40,19 +40,19 @@ function fetchData(vuosi = 0, artikkeli = "", kommentti = "") {
             document.getElementById("IDartikkeli").innerHTML = str;
             document.getElementById("IDkommentti").innerHTML = kommenttiField;
 
-<<<<<<< HEAD
             // render the article comments to HTML
-            let rendr = `<ul id= "listaalku">`;
+            let rendr = `<ul>`;
             let inputValue;
             if (localStorage.getItem(`added-comment`) !== null) {
                 inputValue = JSON.parse(localStorage.getItem(`added-comment`));
                 for (let i = 0; i < inputValue.length; i++) {
                     if (inputValue[i]["articleDate"] == y) {
-                        rendr += `<li>${inputValue[i]["comment"]}</li>`;
+                        rendr += `<li>${inputValue[i]["comment"]} - ${calculateTime(inputValue[i]["commentDate"])}</li>`;
                     }
                 }
                 rendr += `<ul>`;
                 document.querySelector(".kommentit").innerHTML = rendr;
+                console.log(calculateTime(inputValue[0]["commentDate"]));
             }
         }
     });
@@ -61,7 +61,7 @@ fetchData();
 function articleSearch(clicked_id) {
     fetchData(clicked_id);
 }
-function articleDisplay(clicked_article){
+function articleDisplay(clicked_article) {
     fetchData(null, clicked_article);
 }
 // take the comment and pass it to function that sends it to local storage
@@ -98,36 +98,9 @@ function renderYear(obj) {
     document.getElementById("aikajanaLista").innerHTML = str;
 }
 function parseDate(x) {
-    let y = new Date(JSON.parse(`"`+x+`"`));
+    let y = new Date(x);
     return y;
 }
-=======
-let testArray = [];
-
-function fetchData() {
-    fetch("./data.json").then(response => {
-        return response.json();
-    })
-    .then((data) =>  {
-        // console.log(data.artikkelit[0].year)
-        // console.log(data.artikkelit.length)
-        for (i = 0; i < data.artikkelit.length; i++) {
-            testArray.push(data.artikkelit[i].year);
-            //console.log(testArray);
-        }
-        const eriVuodet = [...new Set(testArray)];
-        console.log(eriVuodet);
-        let str = `<ul>`
-
-        eriVuodet.forEach(function(vuosi) {
-            str += `<li>${vuosi}<li>`;
-        });
-        str += `</ul>`
-        document.getElementById("aikajanaLista").innerHTML = str;
-    });
-}   
-fetchData();
->>>>>>> 6b83f21d91fdc11ee12113691db032106eaa2f4c
 
 // Object constructor for article comments
 class Comment {
@@ -136,5 +109,19 @@ class Comment {
         this.articleName = articleName;
         this.comment = comment;
         this.commentDate = commentDate;
+    }
+}
+// add time to comments
+function calculateTime(dateComment) {
+    let commentDate = new Date(dateComment);
+    let sub = (new Date() - commentDate) / (1000 * 60 * 60);
+    if (sub < 0.6) {
+        return (`${Math.floor(sub * 100)} minutes ago`);
+    } else if (sub > 0.6 && sub < 24 * 0.6) {
+        return (`${Math.floor(sub / 0.6)} hours ago`);
+    } else if (sub > 24 * 0.6 && sub < 24 * 7 * 0.6) {
+        return (`${Math.floor(sub / 24 / 0.6)} days ago`);
+    } else {
+        return commentDate;
     }
 }
